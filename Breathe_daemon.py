@@ -202,27 +202,7 @@ def savitzky_golay(y, window_size, order, deriv=0, rate=1):
     return np.convolve( m[::-1], y, mode='valid')
 
 
-def savitzky_golay_piecewise(xvals, data, kernel=11, order =4):
-    turnpoint=0
-    last=len(xvals)
-    if xvals[1]>xvals[0] : #x is increasing?
-        for i in range(1,last) : #yes
-            if xvals[i]<xvals[i-1] : #search where x starts to fall
-                turnpoint=i
-                break
-    else: #no, x is decreasing
-        for i in range(1,last) : #search where it starts to rise
-            if xvals[i]>xvals[i-1] :
-                turnpoint=i
-                break
-    if turnpoint==0 : #no change in direction of x
-        return savitzky_golay(data, kernel, order)
-    else:
-        #smooth the first piece
-        firstpart=savitzky_golay(data[0:turnpoint],kernel,order)
-        #recursively smooth the rest
-        rest=savitzky_golay_piecewise(xvals[turnpoint:], data[turnpoint:], kernel, order)
-        return numpy.concatenate((firstpart,rest))
+
 
 if (ser.isOpen()):
 	try:
