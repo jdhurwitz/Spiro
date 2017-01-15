@@ -133,10 +133,10 @@ void loop() {
           digitalWrite(13, LOW);
         }
         else if(input == '5'){
-          BT.println(processRawData(1));
+          BT.print(processRawData(1));
         }
         else if(input == '6'){
-          BT.println(processRawData(2));
+          BT.print(processRawData(2));
         }
         else{
           BT.println("Unknown request");
